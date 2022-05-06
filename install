@@ -1,0 +1,33 @@
+#!/bin/bash
+PWD="$PWD/$(dirname ${0})"
+
+SRC=(
+	"$PWD/auto_upgrade"
+	"$PWD/last_auto_upgrade"
+)
+
+DST=(
+	"$HOME/.local/bin/auto_upgrade"
+	"$HOME/.local/bin/last_auto_upgrade"
+)
+
+for (( i=0; i < ${#SRC[@]}; i++ )); do
+
+	SRC_I=${SRC[$i]}
+	DST_I=${DST[$i]}
+
+	# Check whether source exists
+	if [ ! -e $SRC_I ]; then
+		continue;
+	fi
+
+	# Create destination base directory if non-existent
+	mkdir -p $(dirname ${DST_I})
+	
+	# Create symbolic link to source
+	ln -sf $SRC_I $DST_I;
+	
+	# Print success message
+	echo "Installed '$SRC_I' -> '$DST_I'";
+
+done
