@@ -1,0 +1,11 @@
+#!/bin/bash
+
+LOGS="$HOME/.local/logs/auto_upgrade"
+if [ ! -d "$LOGS" ]; then
+	mkdir -p $LOGS
+fi
+
+LOG="$LOGS/$(date +%Y%m%d_%H%M%S).log"
+
+sudo apt update > "$LOG"
+sudo apt upgrade -y >> "$LOG"

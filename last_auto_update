@@ -1,0 +1,14 @@
+#!/bin/bash
+
+LOGS="$HOME/.local/logs/auto_upgrade"
+if [ ! -d "$LOGS" ]; then
+	exit
+fi
+
+LOG="$LOGS/$(ls "$LOGS" | tail -n 1)"
+if [ ! -f "$LOG" ]; then
+	exit
+fi
+
+echo $LOG
+cat "$LOG"
